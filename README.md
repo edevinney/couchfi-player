@@ -1,6 +1,11 @@
 # CouchFi Audio Player
 
-A single-purpose Android TV music player. It reads music + radio configs from
+A single-purpose Android TV music player. This totally vibed-up experiment 
+was made purely for my own enjoyment and is provided for your entertainment 
+only. No warrantee, guarantee, promise, value or insinuation of anything like 
+that is made - use at your own risk.
+
+It reads music + radio configs from
 an SMB share, decodes via Android's `MediaCodec`, and writes audio to a
 USB-attached UAC2 DAC through `libusb`, with the option of 4× polyphase
 oversampling before the pack stage. Built originally for an Nvidia Shield TV
