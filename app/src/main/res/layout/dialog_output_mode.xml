@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#121212"
+    android:padding="28dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Output"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:paddingBottom="16dp" />
+
+    <RadioGroup
+        android:id="@+id/out_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/out_native"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="Native (Android mixer)" />
+
+        <RadioButton
+            android:id="@+id/out_nos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="Direct NOS (source rate, no oversampling)" />
+
+        <RadioButton
+            android:id="@+id/out_4x"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="Direct 4× (source × 4, 48 kHz max source)" />
+    </RadioGroup>
+</LinearLayout>

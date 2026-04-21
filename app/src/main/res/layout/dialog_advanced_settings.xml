@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#121212"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Advanced (config.yaml)"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:paddingBottom="4dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit the config and tap Done to apply. Parse errors surface below; your text stays put until it's valid."
+        android:textColor="#BBBBBB"
+        android:textSize="13sp"
+        android:paddingBottom="12dp" />
+
+    <EditText
+        android:id="@+id/adv_yaml"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:gravity="top|start"
+        android:inputType="textMultiLine|textNoSuggestions"
+        android:fontFamily="monospace"
+        android:textSize="13sp"
+        android:textColor="@android:color/white"
+        android:textColorHint="#555555"
+        android:padding="10dp"
+        android:background="@drawable/button_focus_bg"
+        android:scrollbars="vertical" />
+
+    <TextView
+        android:id="@+id/adv_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#E08A8A"
+        android:textSize="13sp"
+        android:paddingTop="8dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:paddingTop="16dp">
+
+        <Button
+            android:id="@+id/adv_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="Done" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#121212"
+    android:padding="28dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Station gain"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Attenuate hot stations or bump quiet ones. Persists per station."
+        android:textColor="#BBBBBB"
+        android:textSize="13sp"
+        android:paddingBottom="16dp" />
+
+    <RadioGroup
+        android:id="@+id/gain_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/gain_minus_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:paddingStart="8dp" android:paddingEnd="8dp"
+            android:textColor="@android:color/white" android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="-12 dB" />
+
+        <RadioButton
+            android:id="@+id/gain_minus_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:paddingStart="8dp" android:paddingEnd="8dp"
+            android:textColor="@android:color/white" android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="-9 dB" />
+
+        <RadioButton
+            android:id="@+id/gain_minus_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:paddingStart="8dp" android:paddingEnd="8dp"
+            android:textColor="@android:color/white" android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="-6 dB" />
+
+        <RadioButton
+            android:id="@+id/gain_minus_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:paddingStart="8dp" android:paddingEnd="8dp"
+            android:textColor="@android:color/white" android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="-3 dB" />
+
+        <RadioButton
+            android:id="@+id/gain_zero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:paddingStart="8dp" android:paddingEnd="8dp"
+            android:textColor="@android:color/white" android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="0 dB (no change)" />
+
+        <RadioButton
+            android:id="@+id/gain_plus_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:paddingStart="8dp" android:paddingEnd="8dp"
+            android:textColor="@android:color/white" android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="+3 dB" />
+    </RadioGroup>
+</LinearLayout>

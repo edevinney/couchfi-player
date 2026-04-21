@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#121212"
+    android:padding="32dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:paddingBottom="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Output mode"
+        android:textColor="#DDDDDD"
+        android:textSize="16sp"
+        android:paddingBottom="6dp" />
+
+    <RadioGroup
+        android:id="@+id/settings_mode_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <RadioButton
+            android:id="@+id/settings_mode_native"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="Native (Android mixer)" />
+
+        <RadioButton
+            android:id="@+id/settings_mode_nos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="Direct NOS (44.1 kHz, no oversampling)" />
+
+        <RadioButton
+            android:id="@+id/settings_mode_4x"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="Direct 176.4 kHz (4× oversampled)" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Library"
+        android:textColor="#DDDDDD"
+        android:textSize="16sp"
+        android:paddingTop="12dp"
+        android:paddingBottom="6dp" />
+
+    <Button
+        android:id="@+id/settings_reindex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:background="@drawable/button_focus_bg"
+        android:text="Re-index library now" />
+
+    <Button
+        android:id="@+id/settings_advanced"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:layout_marginTop="6dp"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:background="@drawable/button_focus_bg"
+        android:text="Advanced…" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:paddingTop="24dp">
+
+        <Button
+            android:id="@+id/settings_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/button_focus_bg"
+            android:text="Done" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/black"
+    android:padding="48dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="12dp">
+
+        <TextView
+            android:id="@+id/player_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#DDDDDD"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/player_gain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="36dp"
+            android:minWidth="96dp"
+            android:layout_marginEnd="6dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:gravity="center"
+            android:textColor="#DDDDDD"
+            android:textSize="13sp"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="@drawable/icon_focus_bg"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/player_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="36dp"
+            android:minWidth="96dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:gravity="center"
+            android:textColor="#DDDDDD"
+            android:textSize="13sp"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="@drawable/icon_focus_bg" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/player_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="36sp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/player_artist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#DDDDDD"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/player_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#888888"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:paddingTop="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/player_elapsed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#BBBBBB"
+            android:textSize="16sp"
+            android:minWidth="64dp"
+            android:gravity="end"
+            android:text="0:00"
+            android:paddingEnd="12dp" />
+
+        <SeekBar
+            android:id="@+id/player_seek"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:max="1000" />
+
+        <TextView
+            android:id="@+id/player_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#BBBBBB"
+            android:textSize="16sp"
+            android:minWidth="64dp"
+            android:gravity="start"
+            android:text="0:00"
+            android:paddingStart="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/btn_prev"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="2dp"
+            android:scaleType="center"
+            android:background="@drawable/icon_focus_bg"
+            android:src="@drawable/ic_prev"
+            android:contentDescription="Previous track" />
+        <ImageButton
+            android:id="@+id/btn_rew"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="2dp"
+            android:scaleType="center"
+            android:background="@drawable/icon_focus_bg"
+            android:src="@drawable/ic_rew"
+            android:contentDescription="Rewind 10 seconds" />
+        <ImageButton
+            android:id="@+id/btn_play"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="2dp"
+            android:scaleType="center"
+            android:background="@drawable/icon_focus_bg"
+            android:src="@drawable/ic_play"
+            android:contentDescription="Play/Pause" />
+        <ImageButton
+            android:id="@+id/btn_ff"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="2dp"
+            android:scaleType="center"
+            android:background="@drawable/icon_focus_bg"
+            android:src="@drawable/ic_ff"
+            android:contentDescription="Fast forward 10 seconds" />
+        <ImageButton
+            android:id="@+id/btn_next"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="2dp"
+            android:scaleType="center"
+            android:background="@drawable/icon_focus_bg"
+            android:src="@drawable/ic_next"
+            android:contentDescription="Next track" />
+        <ImageButton
+            android:id="@+id/btn_stop"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="2dp"
+            android:scaleType="center"
+            android:background="@drawable/icon_focus_bg"
+            android:src="@drawable/ic_stop"
+            android:contentDescription="Stop" />
+        <ImageButton
+            android:id="@+id/btn_shuffle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="2dp"
+            android:scaleType="center"
+            android:background="@drawable/icon_focus_bg"
+            android:src="@drawable/ic_shuffle"
+            android:contentDescription="Shuffle" />
+    </LinearLayout>
+</LinearLayout>

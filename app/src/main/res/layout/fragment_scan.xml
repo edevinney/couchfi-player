@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="64dp"
+    android:background="@android:color/black">
+
+    <TextView
+        android:id="@+id/scan_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scanning library…"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:paddingBottom="20dp" />
+
+    <TextView
+        android:id="@+id/scan_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#BBBBBB"
+        android:textSize="20sp"
+        android:paddingBottom="32dp" />
+
+    <ProgressBar
+        android:id="@+id/scan_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
+
+    <TextView
+        android:id="@+id/scan_current"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#888888"
+        android:textSize="16sp"
+        android:singleLine="true"
+        android:ellipsize="middle"
+        android:paddingTop="24dp" />
+</LinearLayout>

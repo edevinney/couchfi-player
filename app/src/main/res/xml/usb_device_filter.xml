@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Amanero Combo768: VID=0x16d0 (5840), PID=0x0A23 (2595) -->
+    <usb-device vendor-id="5840" product-id="2595" />
+    <!-- HU300 HiFi 2.0 (XMOS): VID=0x20b1 (8369), PID=0x0008 (8) -->
+    <usb-device vendor-id="8369" product-id="8" />
+</resources>

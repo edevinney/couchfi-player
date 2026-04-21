@@ -1,0 +1,57 @@
+CouchFi Audio Player
+Copyright 2026 The CouchFi Audio Player contributors
+
+This product is licensed under the Apache License, Version 2.0 (see
+LICENSE). It includes or depends on the following third-party components,
+each under its own license:
+
+-------------------------------------------------------------------------
+libusb (app/src/main/cpp/include/libusb.h,
+        app/src/main/cpp/libs/arm64-v8a/libusb-1.0.a)
+
+Cross-platform USB library. Statically linked into the native engine so
+the app can drive a UAC2 USB DAC via libusb_wrap_sys_device() against the
+UsbDeviceConnection file descriptor granted by Android.
+
+Licensed under the GNU Lesser General Public License v2.1 or later.
+Source: https://libusb.info/ — https://github.com/libusb/libusb
+
+Under LGPL-2.1 §6, binaries that statically link libusb must permit the
+user to relink with a modified libusb. This requirement is satisfied by
+(a) this attribution notice, (b) distributing the statically-compiled
+archive and header so the user can rebuild the app against their own
+libusb, and (c) keeping the libusb build recipe documented in
+BUILD_SUMMARY.md.
+
+-------------------------------------------------------------------------
+snakeyaml
+org.yaml:snakeyaml:2.2 (declared in app/build.gradle.kts)
+
+YAML 1.1 parser used for station configs and the app's config.yaml.
+Licensed under the Apache License, Version 2.0.
+Source: https://bitbucket.org/snakeyaml/snakeyaml
+
+-------------------------------------------------------------------------
+smbj
+com.hierynomus:smbj:0.13.0 (declared in app/build.gradle.kts)
+
+SMB2/3 client used to read audio files from a network share.
+Licensed under the Apache License, Version 2.0.
+Source: https://github.com/hierynomus/smbj
+
+-------------------------------------------------------------------------
+AndroidX / Leanback
+androidx.core, androidx.fragment, androidx.recyclerview, androidx.leanback
+
+Standard AndroidX support libraries.
+Licensed under the Apache License, Version 2.0.
+Source: https://android.googlesource.com/platform/frameworks/support/
+
+-------------------------------------------------------------------------
+Default album art
+res/drawable-nodpi/tile_art_default.png
+
+Placeholder vinyl-record image used for tiles that have no real cover
+art yet. Contributed to this project by its original author; rights
+reserved to the contributor except as needed to publish under the
+Apache-2.0 license of the enclosing work.

@@ -1,0 +1,11 @@
+# Copy to local.properties and fill in. local.properties is gitignored.
+
+sdk.dir=/Users/YOU/Library/Android/sdk
+ndk.dir=/Users/YOU/Library/Android/sdk/ndk/27.0.12077973
+
+smb.host=192.168.1.x
+smb.user=your_username
+smb.password=your_password
+smb.share=music
+# Path to a test M4A relative to the share root, e.g. Test/sample.m4a
+smb.testfile=Test/sample.m4a

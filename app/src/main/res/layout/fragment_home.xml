@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@android:color/black">
+
+    <!-- Left tab strip: Music / Radio, labels rotated 90°. Each tab is
+         fixed 108×64dp (pre-rotation): 108 gives 'MUSIC' a comfortable
+         cushion along its own axis, 64 is the perpendicular thickness.
+         Tabs are centered vertically with a generous gap between them. -->
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="6dp">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tab_music"
+            android:layout_width="108dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="76dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:gravity="center"
+            android:text="MUSIC"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.2"
+            android:rotation="-90"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="@drawable/tab_focus_bg" />
+
+        <TextView
+            android:id="@+id/tab_radio"
+            android:layout_width="108dp"
+            android:layout_height="64dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:gravity="center"
+            android:text="RADIO"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.2"
+            android:rotation="-90"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="@drawable/tab_focus_bg" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Right column: top bar + grid -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Top bar: category buttons (music only) + transport + overflow -->
+        <LinearLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp">
+
+            <Button
+                android:id="@+id/cat_artists"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginEnd="6dp"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/tab_focus_bg"
+                android:text="Artists" />
+
+            <Button
+                android:id="@+id/cat_albums"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginEnd="6dp"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/tab_focus_bg"
+                android:text="Albums" />
+
+            <Button
+                android:id="@+id/cat_songs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/tab_focus_bg"
+                android:text="Songs" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/btn_play_all"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="2dp"
+                android:scaleType="center"
+                android:background="@drawable/icon_focus_bg"
+                android:src="@drawable/ic_play"
+                android:contentDescription="Play/Pause" />
+
+            <ImageButton
+                android:id="@+id/btn_shuffle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="6dp"
+                android:scaleType="center"
+                android:background="@drawable/icon_focus_bg"
+                android:src="@drawable/ic_shuffle"
+                android:contentDescription="Shuffle" />
+
+            <Button
+                android:id="@+id/btn_overflow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_focus_bg"
+                android:text="⋯" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#888888"
+            android:textSize="13sp"
+            android:paddingBottom="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/grid"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:paddingBottom="8dp" />
+
+            <!-- A-Z / # jump column; populated programmatically. A bit
+                 of left margin + solid background keeps tile pixels in
+                 the grid from abutting the glyph edges and making the
+                 letters look like they're tinting. -->
+            <LinearLayout
+                android:id="@+id/alpha_bar"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/black"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
