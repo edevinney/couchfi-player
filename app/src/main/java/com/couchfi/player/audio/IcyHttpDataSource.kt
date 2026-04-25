@@ -2,6 +2,7 @@ package com.couchfi.player.audio
 
 import android.media.MediaDataSource
 import android.util.Log
+import com.couchfi.player.unescapeXmlEntities
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -178,7 +179,10 @@ class IcyHttpDataSource(
         }
         val text = String(buf, 0, read, Charsets.UTF_8).trimEnd('\u0000', ' ')
         val m = STREAM_TITLE.find(text)
-        val title = m?.groupValues?.get(1)?.trim().orEmpty()
+        // Stations like WXPN sometimes ship XML-escaped apostrophes /
+        // ampersands in the StreamTitle. Decode at the boundary so the
+        // rest of the app sees `Don't` instead of `Don&apos;t`.
+        val title = m?.groupValues?.get(1)?.let(::unescapeXmlEntities)?.trim().orEmpty()
         if (title.isNotEmpty()) {
             Log.i(TAG, "icy now-playing: $title")
             runCatching { onNowPlaying(title) }

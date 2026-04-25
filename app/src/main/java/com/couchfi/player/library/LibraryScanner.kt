@@ -3,6 +3,7 @@ package com.couchfi.player.library
 import android.media.MediaMetadataRetriever
 import android.util.Log
 import com.couchfi.player.art.AlbumArtStore
+import com.couchfi.player.unescapeXmlEntities
 import com.couchfi.player.smb.SmbMediaDataSource
 import com.hierynomus.msdtyp.AccessMask
 import com.hierynomus.msfscc.FileAttributes
@@ -321,42 +322,6 @@ class LibraryScanner(
     // ── helpers ────────────────────────────────────────────────────────
 
     private fun String?.takeUnlessBlank(): String? = this?.takeIf { it.isNotBlank() }
-
-    private fun unescapeXmlEntities(s: String): String {
-        if (s.indexOf('&') < 0) return s
-        val sb = StringBuilder(s.length)
-        var i = 0
-        while (i < s.length) {
-            val c = s[i]
-            if (c != '&') { sb.append(c); i++; continue }
-            val semi = s.indexOf(';', i + 1)
-            if (semi < 0 || semi - i > 10) { sb.append(c); i++; continue }
-            val ent = s.substring(i + 1, semi)
-            val replacement: String? = when {
-                ent == "amp"  -> "&"
-                ent == "lt"   -> "<"
-                ent == "gt"   -> ">"
-                ent == "quot" -> "\""
-                ent == "apos" -> "'"
-                ent.startsWith("#x") || ent.startsWith("#X") ->
-                    ent.drop(2).toIntOrNull(16)
-                        ?.takeIf { it in 0..0x10FFFF }
-                        ?.let { String(Character.toChars(it)) }
-                ent.startsWith("#") ->
-                    ent.drop(1).toIntOrNull()
-                        ?.takeIf { it in 0..0x10FFFF }
-                        ?.let { String(Character.toChars(it)) }
-                else -> null
-            }
-            if (replacement != null) {
-                sb.append(replacement)
-                i = semi + 1
-            } else {
-                sb.append(c); i++
-            }
-        }
-        return sb.toString()
-    }
 
     // Parse "3" or "3/12" or "03".
     private fun parseLeading(raw: String?): Int? {
