@@ -256,11 +256,20 @@ class PlaybackService : Service() {
         val scale = Settings.levelScaleFor(applicationContext, mode)
         return when (mode) {
             OutputMode.NATIVE -> {
-                // Let AudioTrack run at the source rate; Android's own mixer
-                // and HAL handle whatever they handle. Level pass-through so
-                // Native is "truly native" — no digital trim we introduce.
+                // AudioTrack at the source rate, pinned to the USB DAC so
+                // all three modes can be A/B-compared on the same DAC.
+                // Apply the same digital scale as the Direct paths use
+                // (~−6 dB by default) so switching modes is level-matched
+                // — previously the HDMI path's implicit volume curve made
+                // up for the missing trim, but routing directly to the
+                // USB DAC bypasses that, so we have to apply the trim
+                // ourselves to keep A/B apples-to-apples.
                 engineUp = false
-                AudioTrackSink(inputRateHz = inputRateHz, levelScale = 1.0f)
+                AudioTrackSink(
+                    inputRateHz = inputRateHz,
+                    levelScale  = scale,
+                    context     = applicationContext,
+                )
             }
             OutputMode.DIRECT_NOS -> {
                 val rc = audio.nativeEngineStart(conn.fileDescriptor, inputRateHz, 1, scale)

@@ -1,6 +1,8 @@
 package com.couchfi.player.audio
 
+import android.content.Context
 import android.media.AudioAttributes
+import android.media.AudioDeviceInfo
 import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
@@ -46,6 +48,10 @@ class AudioTrackSink(
      *  a lower value is used when equal-output-level is engaged so Native
      *  matches the attenuated Direct 176.4 path. */
     private val levelScale: Float = 1.0f,
+    /** Optional context used to pin the AudioTrack to a USB DAC if one is
+     *  attached. When null (or no USB device present), playback follows
+     *  the system's default routing (typically HDMI on the Shield). */
+    private val context: Context? = null,
 ) : AudioSink {
 
     private val bufFrames: Int
@@ -82,6 +88,27 @@ class AudioTrackSink(
 
         track.play()
         Log.i(TAG, "AudioTrack opened: $inputRateHz Hz PCM_FLOAT stereo, buf=$bufFrames frames")
+
+        // Pin the AudioTrack to the USB DAC when one is attached, so the
+        // Native mode can be A/B-compared against Direct NOS / Direct 4×
+        // on the same hardware. Without this the Shield routes Native to
+        // its default sink (HDMI), which makes the comparison meaningless.
+        // Falls through silently when no USB output is present —
+        // playback follows the system default in that case.
+        context?.let { ctx ->
+            val am = ctx.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            val usb = am.getDevices(AudioManager.GET_DEVICES_OUTPUTS).firstOrNull { d ->
+                d.type == AudioDeviceInfo.TYPE_USB_DEVICE ||
+                    d.type == AudioDeviceInfo.TYPE_USB_HEADSET ||
+                    d.type == AudioDeviceInfo.TYPE_USB_ACCESSORY
+            }
+            if (usb != null) {
+                val pinned = track.setPreferredDevice(usb)
+                Log.i(TAG, "preferred device set to USB id=${usb.id} '${usb.productName}' → $pinned")
+            } else {
+                Log.i(TAG, "no USB output device attached; following system default routing")
+            }
+        }
     }
 
     private var scaled: FloatArray = FloatArray(0)
