@@ -25,6 +25,7 @@ class SettingsDialogFragment : DialogFragment() {
         fun onSettingsOutputModeChanged(mode: OutputMode)
         fun onSettingsReindexRequested()
         fun onSettingsOpenAdvanced()
+        fun onSettingsOpenSmbSetup()
     }
 
     private val host: Host? get() = activity as? Host
@@ -42,6 +43,7 @@ class SettingsDialogFragment : DialogFragment() {
         val btnNos:    RadioButton = v.findViewById(R.id.settings_mode_nos)
         val btn4x:     RadioButton = v.findViewById(R.id.settings_mode_4x)
         val btnReindex:  Button = v.findViewById(R.id.settings_reindex)
+        val btnSmbSetup: Button = v.findViewById(R.id.settings_smb_setup)
         val btnAdvanced: Button = v.findViewById(R.id.settings_advanced)
         val btnDone:     Button = v.findViewById(R.id.settings_done)
 
@@ -67,6 +69,10 @@ class SettingsDialogFragment : DialogFragment() {
             btnReindex.text = "Will re-index on Done"
         }
 
+        btnSmbSetup.setOnClickListener {
+            host?.onSettingsOpenSmbSetup()
+            dismiss()
+        }
         btnAdvanced.setOnClickListener {
             host?.onSettingsOpenAdvanced()
             dismiss()

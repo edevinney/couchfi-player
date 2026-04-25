@@ -37,7 +37,8 @@ class MainActivity :
     SettingsDialogFragment.Host,
     OutputModeDialogFragment.Host,
     RadioGainDialogFragment.Host,
-    AdvancedSettingsDialogFragment.Host {
+    AdvancedSettingsDialogFragment.Host,
+    SmbSetupDialogFragment.Host {
 
     private val usbManager by lazy { getSystemService(Context.USB_SERVICE) as UsbManager }
 
@@ -516,6 +517,10 @@ class MainActivity :
 
     override fun onSettingsOpenAdvanced() {
         AdvancedSettingsDialogFragment().show(supportFragmentManager, "advanced")
+    }
+
+    override fun onSettingsOpenSmbSetup() {
+        SmbSetupDialogFragment().show(supportFragmentManager, "smb-setup")
     }
 
     // ── AdvancedSettingsDialogFragment.Host ────────────────────────────────

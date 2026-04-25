@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#121212">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SMB / NAS setup"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Where CouchFi finds your music. Test the connection before saving — Test reports auth, network, share, and music-path errors separately so you know which field to fix."
+            android:textColor="#BBBBBB"
+            android:textSize="13sp"
+            android:paddingBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Host"
+            android:textColor="#DDDDDD"
+            android:textSize="13sp"
+            android:paddingTop="6dp" />
+        <EditText
+            android:id="@+id/smb_host"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="nas.local or 192.168.1.10"
+            android:textColor="@android:color/white"
+            android:textColorHint="#555555"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:inputType="textNoSuggestions"
+            android:background="@drawable/button_focus_bg" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share"
+            android:textColor="#DDDDDD"
+            android:textSize="13sp"
+            android:paddingTop="10dp" />
+        <EditText
+            android:id="@+id/smb_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Music"
+            android:textColor="@android:color/white"
+            android:textColorHint="#555555"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:inputType="textNoSuggestions"
+            android:background="@drawable/button_focus_bg" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textColor="#DDDDDD"
+            android:textSize="13sp"
+            android:paddingTop="10dp" />
+        <EditText
+            android:id="@+id/smb_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textColorHint="#555555"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:inputType="textNoSuggestions"
+            android:background="@drawable/button_focus_bg" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textColor="#DDDDDD"
+            android:textSize="13sp"
+            android:paddingTop="10dp" />
+        <EditText
+            android:id="@+id/smb_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textColorHint="#555555"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:background="@drawable/button_focus_bg" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Music folder path (relative to share, blank = share root)"
+            android:textColor="#DDDDDD"
+            android:textSize="13sp"
+            android:paddingTop="10dp" />
+        <EditText
+            android:id="@+id/smb_music_path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Music Library"
+            android:textColor="@android:color/white"
+            android:textColorHint="#555555"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:inputType="textNoSuggestions"
+            android:background="@drawable/button_focus_bg" />
+
+        <TextView
+            android:id="@+id/smb_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:paddingTop="12dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:paddingTop="16dp">
+
+            <Button
+                android:id="@+id/smb_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:background="@drawable/button_focus_bg"
+                android:text="Cancel" />
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/smb_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:background="@drawable/button_focus_bg"
+                android:text="Test" />
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/smb_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:background="@drawable/button_focus_bg"
+                android:text="Save" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
