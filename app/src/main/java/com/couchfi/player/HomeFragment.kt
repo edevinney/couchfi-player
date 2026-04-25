@@ -1,6 +1,7 @@
 package com.couchfi.player
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -77,6 +78,12 @@ class HomeFragment : Fragment() {
     private var musicCategory: MusicCategory = MusicCategory.ARTISTS
     private var shuffleOn: Boolean = false
 
+    // Scroll/focus to restore on the next loadGrid completion. Captured
+    // when the view is torn down (drill-into-detail back-stack push) and
+    // consumed once when the recreated view's data is ready.
+    private var pendingScrollState: Parcelable? = null
+    private var pendingFocusPosition: Int = RecyclerView.NO_POSITION
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -118,6 +125,50 @@ class HomeFragment : Fragment() {
         applyTab()
         onPlaybackStateChanged(host?.currentPlaybackState() ?: PlaybackController.State.IDLE)
         return v
+    }
+
+    override fun onDestroyView() {
+        // Stash the grid's scroll position + currently-focused tile so we
+        // can restore them when the user comes back from a drill-into
+        // detail screen. The fragment instance survives back-stack push
+        // (only its View dies), so plain member fields are enough.
+        if (this::grid.isInitialized) {
+            pendingScrollState   = grid.layoutManager?.onSaveInstanceState()
+            pendingFocusPosition = grid.findFocus()
+                ?.let { grid.findContainingViewHolder(it)?.bindingAdapterPosition }
+                ?: RecyclerView.NO_POSITION
+        }
+        super.onDestroyView()
+    }
+
+    /** Restore scroll + focus if a back-nav left them pending; otherwise
+     *  fall back to the default "focus the grid" behavior. Consumes the
+     *  pending fields so the next loadGrid (tab/category switch) starts
+     *  from the top as usual. */
+    private fun restoreScrollOrFocusGrid() {
+        val pendingScroll = pendingScrollState
+        val pendingFocus  = pendingFocusPosition
+        pendingScrollState   = null
+        pendingFocusPosition = RecyclerView.NO_POSITION
+        if (pendingScroll == null && pendingFocus == RecyclerView.NO_POSITION) {
+            grid.post { grid.requestFocus() }
+            return
+        }
+        grid.post {
+            pendingScroll?.let { grid.layoutManager?.onRestoreInstanceState(it) }
+            if (pendingFocus != RecyclerView.NO_POSITION) {
+                // The ViewHolder for this position may not be bound yet on
+                // the very first layout pass — post once more so the row
+                // is on screen before we ask it to take focus.
+                grid.post {
+                    val vh = grid.findViewHolderForAdapterPosition(pendingFocus)
+                    if (vh != null) vh.itemView.requestFocus()
+                    else grid.requestFocus()
+                }
+            } else {
+                grid.requestFocus()
+            }
+        }
     }
 
     override fun onResume() {
@@ -346,7 +397,7 @@ class HomeFragment : Fragment() {
                     Log.i(TAG, "loadGrid: submitting ${rows.size} radio rows")
                     radioAdapter.submit(rows)
                     subtitle.text = "${subtitle.text}  ·  ${rows.size}"
-                    grid.post { grid.requestFocus() }
+                    restoreScrollOrFocusGrid()
                 }
                 return@Thread
             }
@@ -360,7 +411,7 @@ class HomeFragment : Fragment() {
                 Log.i(TAG, "loadGrid: submitting ${items.size} tiles to adapter")
                 adapter.submit(items)
                 subtitle.text = "${subtitle.text}  ·  ${items.size}"
-                grid.post { grid.requestFocus() }
+                restoreScrollOrFocusGrid()
             }
         }.start()
     }
