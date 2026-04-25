@@ -9,7 +9,8 @@ It reads music + radio configs from
 an SMB share, decodes via Android's `MediaCodec`, and writes audio to a
 USB-attached UAC2 DAC through `libusb`, with the option of 4× polyphase
 oversampling before the pack stage. Built originally for an Nvidia Shield TV
-driving an XMOS-bridged AD1862 NOS ladder DAC.
+driving an XMOS-bridged AD1862 NOS ladder DAC. CouchFi ignores the system audio 
+output setting and always plays to USB.
 
 AudioFlinger is optionally bypassed: the app either routes PCM through
 Android's normal audio path (for A/B comparison) or writes 24-bit samples
