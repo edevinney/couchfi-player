@@ -14,6 +14,7 @@ fun p(key: String, default: String = ""): String = localProps.getProperty(key, d
 android {
     namespace = "com.couchfi.player"
     compileSdk = 34
+    ndkVersion = "27.0.12077973"
 
     defaultConfig {
         applicationId = "com.couchfi.player"

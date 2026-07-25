@@ -112,10 +112,22 @@ broadcasts `PLAYING/PAUSED/IDLE` to the fragment.
   install paths on spaces. Workaround: skip `make install`, copy
   `libusb/.libs/libusb-1.0.a` and `libusb/libusb.h` straight out of the
   build tree.
-- **AGP auto-installs a second NDK.** Even though we explicitly pinned NDK
-  27, AGP 8.5 silently grabbed NDK 26 during the first sync and used it for
-  `arm64-v8a`. Both work; left alone since it's self-contained under
-  `~/Library/Android/sdk/ndk/`.
+- **AGP auto-installs a second NDK -- resolved.** Originally noted here as
+  "both work, left alone": AGP 8.5 defaults to NDK 26.1.10909125 when
+  `android.ndkVersion` isn't set in `build.gradle.kts`, while our docs
+  told people to install NDK 27 (matching the toolchain the vendored
+  `libusb-1.0.a` was actually built with) and `local.properties.example`
+  pointed `ndk.dir` at that NDK 27 install. That turned out not to be a
+  harmless coexistence: AGP checks the NDK found via `ndk.dir` against
+  its own expected version (26, since nothing overrode it) and fails
+  the build outright on a mismatch (`CXX1104`) -- so a fresh checkout
+  following this doc's setup steps exactly no longer builds clean.
+  Fixed by explicitly setting `ndkVersion = "27.0.12077973"` in
+  `app/build.gradle.kts`, which makes AGP's expected version match NDK 27
+  instead of defaulting to 26. `ndk.dir` is no longer needed in
+  `local.properties` as a result -- AGP resolves NDK 27 on its own from
+  `sdk.dir/ndk/27.0.12077973` -- and has been removed from
+  `local.properties.example` and the README.
 
 ### UAC2 on Android
 

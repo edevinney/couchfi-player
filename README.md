@@ -74,7 +74,7 @@ cd couchfi-player
 
 ### 2. Create `local.properties`
 
-This file is gitignored and holds your Android SDK / NDK paths plus
+This file is gitignored and holds your Android SDK path plus
 **default** SMB credentials that get baked into `BuildConfig`. The app
 reads these the first time it launches and lets you override them at
 runtime via the Advanced YAML editor, so the values here are just
@@ -90,7 +90,6 @@ Fill in:
 
 ```properties
 sdk.dir=/Users/YOU/Library/Android/sdk
-ndk.dir=/Users/YOU/Library/Android/sdk/ndk/27.0.12077973
 
 smb.host=192.168.1.x          # LAN hostname or IP of your SMB server
 smb.user=your_username
@@ -98,6 +97,16 @@ smb.password=your_password
 smb.share=music               # share name (e.g. "Music", "storage")
 smb.testfile=Test/sample.m4a  # a known file, used by legacy dev tools
 ```
+
+No `ndk.dir` entry is needed -- `app/build.gradle.kts` pins
+`android.ndkVersion = "27.0.12077973"`, and AGP resolves that NDK
+automatically from `sdk.dir/ndk/27.0.12077973` as long as it's installed
+(see step 1's `sdkmanager` command). If you're upgrading an older
+checkout that still has `ndk.dir` in `local.properties`, delete that
+line -- it's a deprecated override that used to be required to work
+around AGP defaulting to a different NDK version than this project
+actually builds against (see `BUILD_SUMMARY.md`'s "Lessons Learned" for
+the history).
 
 The `smb.*` values are **not** required for the app to build — they're
 just pre-fill for the Advanced dialog on first run.
