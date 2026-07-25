@@ -24,6 +24,19 @@ libusb, and (c) keeping the libusb build recipe documented in
 BUILD_SUMMARY.md.
 
 -------------------------------------------------------------------------
+r8brain-free-src (app/src/main/cpp/third_party/r8brain-free-src/)
+
+High-quality sample rate converter (Aleksey Vaneev / Voxengo), used to
+resample REW-exported room-correction impulse responses from their
+native measurement rate to the engine's fixed 176400Hz output rate,
+once at load time. Vendored header-only, configured to use its bundled
+Ooura FFT4G backend (fft/fft4g.h) rather than PFFFT.
+
+Licensed under the MIT License.
+Source: https://github.com/avaneev/r8brain-free-src
+Vendored from commit e71c31bf320f84210bb4bdcb57e296c39ce940f9.
+
+-------------------------------------------------------------------------
 snakeyaml
 org.yaml:snakeyaml:2.2 (declared in app/build.gradle.kts)
 

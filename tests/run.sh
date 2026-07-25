@@ -25,3 +25,26 @@ xcrun clang++ -std=c++17 -Wall -Wextra -O2 \
 
 echo "==> running test_polyphase_fir"
 "$OUT/test_polyphase_fir"
+
+echo "==> building test_wav_ir_loader"
+xcrun clang++ -std=c++17 -Wall -Wextra -O2 \
+    -isysroot "$SDKROOT" \
+    -nostdinc++ -isystem "$CXX_INC" \
+    tests/room_correction/test_wav_ir_loader.cpp \
+    app/src/main/cpp/room_correction/wav_ir_loader.cpp \
+    -o "$OUT/test_wav_ir_loader"
+
+echo "==> running test_wav_ir_loader"
+"$OUT/test_wav_ir_loader"
+
+echo "==> building test_ir_resampler"
+xcrun clang++ -std=c++17 -Wall -Wextra -O2 \
+    -isysroot "$SDKROOT" \
+    -nostdinc++ -isystem "$CXX_INC" \
+    -I app/src/main/cpp/third_party/r8brain-free-src \
+    tests/room_correction/test_ir_resampler.cpp \
+    app/src/main/cpp/room_correction/ir_resampler.cpp \
+    -o "$OUT/test_ir_resampler"
+
+echo "==> running test_ir_resampler"
+"$OUT/test_ir_resampler"

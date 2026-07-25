@@ -7,14 +7,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(couchfi SHARED
     audio_engine.cpp
     filter/polyphase_fir.cpp
+    room_correction/wav_ir_loader.cpp
+    room_correction/ir_resampler.cpp
     usb/usb_audio.cpp
 )
 
 target_include_directories(couchfi PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/filter
+    ${CMAKE_CURRENT_SOURCE_DIR}/room_correction
     ${CMAKE_CURRENT_SOURCE_DIR}/usb
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party/r8brain-free-src
 )
 
 # libusb static — cross-compiled per research/dev-environment-setup.md §4.
