@@ -37,6 +37,20 @@ Source: https://github.com/avaneev/r8brain-free-src
 Vendored from commit e71c31bf320f84210bb4bdcb57e296c39ce940f9.
 
 -------------------------------------------------------------------------
+PFFFT (app/src/main/cpp/third_party/pffft/)
+
+"Pretty Fast FFT" — single-precision, SIMD-accelerated 1-D FFT (Julien
+Pommier). Used as the FFT primitive for room-correction's
+FFT-partitioned overlap-save convolver. Vendored as source; the NEON
+code path is active on the arm64-v8a build.
+
+Derived from FFTPACKv4/v5 by Dr Paul Swarztrauber (NCAR); licensed
+under the NCAR/UCAR FFTPACK license (a BSD-3-Clause-style permissive
+license — see the header of pffft.h/pffft.c for the full text).
+Source: https://bitbucket.org/jpommier/pffft
+Vendored from commit 09796885cd5b9da5692242de2df0d81e5e1f3d21.
+
+-------------------------------------------------------------------------
 snakeyaml
 org.yaml:snakeyaml:2.2 (declared in app/build.gradle.kts)
 

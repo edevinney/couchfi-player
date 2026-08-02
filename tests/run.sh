@@ -48,3 +48,39 @@ xcrun clang++ -std=c++17 -Wall -Wextra -O2 \
 
 echo "==> running test_ir_resampler"
 "$OUT/test_ir_resampler"
+
+# PFFFT is C, not C++, and the vendored source has a couple of
+# intentional warnings under -Wall -Wextra we silence for the .c file
+# only (not the wider build). Compile as an object first with clang
+# (not clang++), then link into the C++ test binary.
+echo "==> building test_pffft_smoke"
+xcrun clang -std=c11 -Wall -Wextra -O2 \
+    -isysroot "$SDKROOT" \
+    -Wno-sign-compare -Wno-unused-function \
+    -I app/src/main/cpp/third_party/pffft \
+    -c app/src/main/cpp/third_party/pffft/pffft.c \
+    -o "$OUT/pffft.o"
+xcrun clang++ -std=c++17 -Wall -Wextra -O2 \
+    -isysroot "$SDKROOT" \
+    -nostdinc++ -isystem "$CXX_INC" \
+    -I app/src/main/cpp/third_party/pffft \
+    tests/room_correction/test_pffft_smoke.cpp \
+    "$OUT/pffft.o" \
+    -o "$OUT/test_pffft_smoke"
+
+echo "==> running test_pffft_smoke"
+"$OUT/test_pffft_smoke"
+
+echo "==> building test_partitioned_fir"
+xcrun clang++ -std=c++17 -Wall -Wextra -O2 \
+    -isysroot "$SDKROOT" \
+    -nostdinc++ -isystem "$CXX_INC" \
+    -I app/src/main/cpp/room_correction \
+    -I app/src/main/cpp/third_party/pffft \
+    tests/room_correction/test_partitioned_fir.cpp \
+    app/src/main/cpp/room_correction/partitioned_fir.cpp \
+    "$OUT/pffft.o" \
+    -o "$OUT/test_partitioned_fir"
+
+echo "==> running test_partitioned_fir"
+"$OUT/test_partitioned_fir"
